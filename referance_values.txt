@@ -1,0 +1,43 @@
+Ransomware Surfaces
+
+Surface 1
+- Z: ransomware → X: fwrite → Y: ent
+- Şifreli veri yazma hızı × entropi → en kritik ransomware imzası
+[75  480  NaN  40  80  50  45  12  NaN  3]
+
+Surface 2
+- Z: ransomware → X: fwrite → Y: ext
+- Yazma hızı × dokunulan farklı dosya uzantısı sayısı
+[75  480  NaN  40  80  50  NaN  12  7.8  3]
+
+---
+Trojan Surfaces
+
+Surface 3
+- Z: trojan → X: nettx → Y: conn
+- Upload hızı × bağlantı sayısı → exfiltration + botnet imzası
+[18  210  8  12  NaN  3500  5  NaN  3.2  14]
+
+Surface 4
+- Z: trojan → X: nettx → Y: priv
+- Upload hızı × yetki seviyesi → backdoor + privilege escalation
+[18  210  8  12  NaN  3500  5  320  3.2  NaN]
+
+---
+Cryptominer Surfaces
+
+Surface 5
+- Z: cryptominer → X: cpu → Y: mem
+- CPU yükü × RAM kullanımı (RandomX scratchpad etkisi görünür)
+[NaN  NaN  1  5  700  200  2  20  2.8  1]
+
+Surface 6
+- Z: cryptominer → X: cpu → Y: nettx
+- CPU yükü × pool trafiği → cpu extreme + moderate nettx köşesinde zirve yapar
+[NaN  1400  1  5  NaN  200  2  20  2.8  1]
+
+---
+Input Sırası Referansı
+
+[ cpu  mem  fwrite  file_read  nettx  netrx  ext  conn  ent  priv ]
+[  1    2      3        4        5      6      7    8     9    10  ]

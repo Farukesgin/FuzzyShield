@@ -1,0 +1,23 @@
+# Python virtual environment
+env-fuzzy/
+__pycache__/
+*.pyc
+
+# Generated analysis outputs (recreated on each run)
+output/
+
+# LaTeX report (not part of the published code)
+report/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+
+# Claude Code local settings
+.claude/
+
+# OS noise
+.DS_Store
+Thumbs.db
