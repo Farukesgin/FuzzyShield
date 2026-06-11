@@ -3,10 +3,10 @@ env-fuzzy/
 __pycache__/
 *.pyc
 
-# Generated analysis outputs (recreated on each run)
+# Generated analysis outputs 
 output/
 
-# Third-party IEEE template sample (not ours)
+# Third-party IEEE template sample
 report/referance/
 
 # LaTeX build artifacts
