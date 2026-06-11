@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" version="21.0.0">
+<diagram id="fz-arch" name="FuzzyShield Architecture">
+<!--
+  Tüm kutular dikey merkez çizgisinde hizalı: y_center = 250
+    h=110  →  y = 195
+    h= 90  →  y = 205
+    h= 80  →  y = 210
+
+  Yatay düzende sağa git (sol kenar → sağ kenar, boşluk):
+    psutil    : x=  30, w=140 → sağ=170  │ boşluk 60
+    Fuzzifier : x= 230, w=165 → sağ=395  │ boşluk 65
+    InfEngine : x= 460, w=175 → sağ=635  │ boşluk 70
+    Defuzz    : x= 705, w=165 → sağ=870  │ boşluk 75
+    EWMA      : x= 945, w=195 → sağ=1140 │ boşluk 75
+    Verdict   : x=1215, w=175 → sağ=1390 │ boşluk 75
+    Alert     : x=1465, w=140 → sağ=1605
+-->
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1"
+              pageWidth="1700" pageHeight="640"
+              math="0" shadow="0">
+  <root>
+    <mxCell id="0"/>
+    <mxCell id="1" parent="0"/>
+
+    <!-- ═══════════════════════════════════════════
+         BAŞLIK
+    ═══════════════════════════════════════════ -->
+    <mxCell id="title"
+      value="&lt;b&gt;&lt;font style=&apos;font-size:17px&apos;&gt;FuzzyShield — Complete System Architecture&lt;/font&gt;&lt;/b&gt;"
+      style="text;html=1;align=center;verticalAlign=middle;
+             strokeColor=none;fillColor=none;"
+      vertex="1" parent="1">
+      <mxGeometry x="20" y="10" width="1650" height="32" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         ÜST SIRA — bilgi kutuları  (y=55, h=75)
+    ═══════════════════════════════════════════ -->
+
+    <!-- Knowledge Base -->
+    <mxCell id="kb"
+      value="&lt;b&gt;Fuzzy Knowledge Base&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos;&gt;Membership Functions&lt;br&gt;trapmf / trimf&lt;br&gt;5 terms per variable&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#fff2cc;strokeColor=#d6b656;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="240" y="55" width="160" height="75" as="geometry"/>
+    </mxCell>
+
+    <!-- Rule Base -->
+    <mxCell id="rb"
+      value="&lt;b&gt;Fuzzy Rule Base&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos;&gt;34 Mamdani Rules&lt;br&gt;12R · 9T · 8C · 3M · 2B&lt;br&gt;AND=min, Aggr.=max&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#f8cecc;strokeColor=#b85450;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="470" y="55" width="160" height="75" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         ANA AKIŞ SATIRI  (merkez y=250)
+    ═══════════════════════════════════════════ -->
+
+    <!-- psutil  h=110  y=195 -->
+    <mxCell id="ps"
+      value="&lt;b&gt;psutil&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos;&gt;Process Sensor&lt;br&gt;────────────&lt;br&gt;cpu · mem&lt;br&gt;fwrite · fread&lt;br&gt;nettx · netrx&lt;br&gt;ext · conn&lt;br&gt;ent · priv&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#dae8fc;strokeColor=#6c8ebf;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="30" y="195" width="140" height="110" as="geometry"/>
+    </mxCell>
+
+    <!-- Fuzzifier  h=90  y=205 -->
+    <mxCell id="fz"
+      value="&lt;b&gt;Fuzzifier&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos;&gt;μ(x) ∈ [0, 1]&lt;br&gt;50 membership values&lt;br&gt;(10 vars × 5 terms)&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#e1d5e7;strokeColor=#9673a6;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="230" y="205" width="165" height="90" as="geometry"/>
+    </mxCell>
+
+    <!-- Inference Engine  h=90  y=205 -->
+    <mxCell id="ie"
+      value="&lt;b&gt;&lt;font color=&apos;#ffffff&apos;&gt;Inference Engine&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos; color=&apos;#b0c8ff&apos;&gt;α_k = min(antecedents)&lt;br&gt;output MF clipped to α_k&lt;br&gt;rules aggregated by max&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#1F3864;strokeColor=#0D2040;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="460" y="205" width="175" height="90" as="geometry"/>
+    </mxCell>
+
+    <!-- Defuzzifier  h=90  y=205 -->
+    <mxCell id="df"
+      value="&lt;b&gt;Defuzzifier&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos;&gt;Centroid method&lt;br&gt;6 output terms&lt;br&gt;→ raw R, T, C ∈ [0,1]&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#d5e8d4;strokeColor=#82b366;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="705" y="205" width="165" height="90" as="geometry"/>
+    </mxCell>
+
+    <!-- EWMA  h=110  y=195 -->
+    <mxCell id="ew"
+      value="&lt;b&gt;Asymmetric EWMA&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos;&gt;α↑ = 0.15  (fast rise)&lt;br&gt;α↓ = 0.85  (slow fall)&lt;br&gt;s = α·prev + (1-α)·raw&lt;br&gt;State: prev R, T, C&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#ffe6cc;strokeColor=#d6841e;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="945" y="195" width="195" height="110" as="geometry"/>
+    </mxCell>
+
+    <!-- Verdict Engine  h=90  y=205 -->
+    <mxCell id="ve"
+      value="&lt;b&gt;&lt;font color=&apos;#ffffff&apos;&gt;Verdict Engine&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos; color=&apos;#b0c8ff&apos;&gt;TIE_DELTA = 5%&lt;br&gt;MIN_ACTIVE = 35%&lt;br&gt;Compound: R+T, R+C…&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#003C78;strokeColor=#002050;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="1215" y="205" width="175" height="90" as="geometry"/>
+    </mxCell>
+
+    <!-- Alert  h=80  y=210 -->
+    <mxCell id="al"
+      value="&lt;b&gt;Alert&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos;&gt;BENIGN · SUSPICIOUS&lt;br&gt;RANSOMWARE · TROJAN&lt;br&gt;CRYPTOMINER&lt;br&gt;R+T compound&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#dae8fc;strokeColor=#6c8ebf;
+             fontSize=12;fontStyle=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="1465" y="210" width="140" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         GERİ BESLEME SATIRI  (y=420)
+    ═══════════════════════════════════════════ -->
+
+    <!-- State Memory  x=945  y=420  w=195  h=80 -->
+    <mxCell id="sm"
+      value="&lt;b&gt;State Memory&lt;/b&gt;&lt;br&gt;&lt;font size=&apos;10&apos;&gt;prev_R, prev_T, prev_C&lt;br&gt;smoothed scores at t-1&lt;br&gt;updated each window&lt;/font&gt;"
+      style="rounded=1;html=1;whiteSpace=wrap;arcSize=8;
+             fillColor=#ffe6cc;strokeColor=#d6841e;
+             fontSize=11;fontStyle=1;dashed=1;"
+      vertex="1" parent="1">
+      <mxGeometry x="945" y="420" width="195" height="80" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         OK — İleri akış  (strokeWidth=3)
+    ═══════════════════════════════════════════ -->
+
+    <!-- psutil → Fuzzifier -->
+    <mxCell id="e1" value="x₁ (10 metrics)"
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=3;strokeColor=#6c8ebf;
+             fontSize=11;fontStyle=2;labelBackgroundColor=#ffffff;
+             exitX=1;exitY=0.5;exitDx=0;exitDy=0;
+             entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+      edge="1" source="ps" target="fz" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Fuzzifier → Inference Engine -->
+    <mxCell id="e2" value="k(x) = μ(x)"
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=3;strokeColor=#9673a6;
+             fontSize=11;fontStyle=2;labelBackgroundColor=#ffffff;
+             exitX=1;exitY=0.5;exitDx=0;exitDy=0;
+             entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+      edge="1" source="fz" target="ie" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Inference Engine → Defuzzifier -->
+    <mxCell id="e3" value="k(y) = α_k"
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=3;strokeColor=#1F3864;
+             fontSize=11;fontStyle=2;labelBackgroundColor=#ffffff;
+             exitX=1;exitY=0.5;exitDx=0;exitDy=0;
+             entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+      edge="1" source="ie" target="df" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Defuzzifier → EWMA -->
+    <mxCell id="e4" value="raw R, T, C"
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=3;strokeColor=#82b366;
+             fontSize=11;fontStyle=2;labelBackgroundColor=#ffffff;
+             exitX=1;exitY=0.5;exitDx=0;exitDy=0;
+             entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+      edge="1" source="df" target="ew" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- EWMA → Verdict Engine -->
+    <mxCell id="e5" value="smooth R, T, C"
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=3;strokeColor=#d6841e;
+             fontSize=11;fontStyle=2;labelBackgroundColor=#ffffff;
+             exitX=1;exitY=0.5;exitDx=0;exitDy=0;
+             entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+      edge="1" source="ew" target="ve" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- Verdict Engine → Alert -->
+    <mxCell id="e6" value="verdict"
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=3;strokeColor=#003C78;
+             fontSize=11;fontStyle=2;labelBackgroundColor=#ffffff;
+             exitX=1;exitY=0.5;exitDx=0;exitDy=0;
+             entryX=0;entryY=0.5;entryDx=0;entryDy=0;"
+      edge="1" source="ve" target="al" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         OK — Bilgi bağlantıları (dashed, ince)
+    ═══════════════════════════════════════════ -->
+
+    <!-- Knowledge Base → Fuzzifier (KB bottom-center → Fuzz top) -->
+    <mxCell id="e7" value=""
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=1.5;strokeColor=#d6b656;
+             dashed=1;dashPattern=8 4;
+             exitX=0.5;exitY=1;exitDx=0;exitDy=0;
+             entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+      edge="1" source="kb" target="fz" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="320" y="158"/>
+          <mxPoint x="312" y="158"/>
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Rule Base → Inference Engine (RB bottom-center → InfEng top) -->
+    <mxCell id="e8" value=""
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=2;strokeColor=#b85450;
+             exitX=0.5;exitY=1;exitDx=0;exitDy=0;
+             entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+      edge="1" source="rb" target="ie" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="550" y="158"/>
+          <mxPoint x="547" y="158"/>
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         OK — Geri besleme döngüsü
+    ═══════════════════════════════════════════ -->
+
+    <!-- EWMA → State Memory (düz aşağı)
+         EWMA bottom-center  = (1042, 305)
+         SM   top-center     = (1042, 420)  boşluk=115 -->
+    <mxCell id="e9" value="store"
+      style="edgeStyle=orthogonalEdgeStyle;rounded=0;
+             strokeWidth=2;strokeColor=#d6841e;
+             dashed=1;dashPattern=6 3;
+             fontSize=10;fontStyle=2;labelBackgroundColor=#ffffff;
+             exitX=0.5;exitY=1;exitDx=0;exitDy=0;
+             entryX=0.5;entryY=0;entryDx=0;entryDy=0;"
+      edge="1" source="ew" target="sm" parent="1">
+      <mxGeometry relative="1" as="geometry"/>
+    </mxCell>
+
+    <!-- State Memory → EWMA  (sol kenar etrafında dönen geri besleme oku)
+         SM   sol orta  exitX=0 → (945, 460)
+         EWMA sol alt   entryX=0, entryY=0.8 → (945, 195+88=283)
+         Ara noktalar: (870, 460) → (870, 283) -->
+    <mxCell id="e10" value="prev_score (t-1)"
+      style="edgeStyle=orthogonalEdgeStyle;rounded=1;
+             strokeWidth=2.5;strokeColor=#d6841e;
+             dashed=1;dashPattern=8 4;
+             fontSize=11;fontStyle=2;labelBackgroundColor=#ffffff;
+             exitX=0;exitY=0.5;exitDx=0;exitDy=0;
+             entryX=0;entryY=0.8;entryDx=0;entryDy=0;"
+      edge="1" source="sm" target="ew" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="870" y="460"/>
+          <mxPoint x="870" y="283"/>
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- ═══════════════════════════════════════════
+         AÇIKLAMA KUTUSU
+    ═══════════════════════════════════════════ -->
+    <mxCell id="leg"
+      value="&lt;b&gt;Legend:&lt;/b&gt;  ━━━  forward data flow     ┅┅┅  EWMA temporal feedback     ╌╌╌  knowledge dependency (MF definitions / rules)"
+      style="text;html=1;align=left;verticalAlign=middle;
+             fontSize=11;strokeColor=none;fillColor=none;"
+      vertex="1" parent="1">
+      <mxGeometry x="30" y="548" width="1000" height="28" as="geometry"/>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
+</diagram>
+</mxfile>

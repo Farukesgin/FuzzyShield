@@ -6,14 +6,17 @@ __pycache__/
 # Generated analysis outputs (recreated on each run)
 output/
 
-# LaTeX report (not part of the published code)
-report/
+# Third-party IEEE template sample (not ours)
+report/referance/
 
 # LaTeX build artifacts
 *.aux
 *.log
 *.out
 *.synctex.gz
+*.nav
+*.snm
+*.toc
 
 # Claude Code local settings
 .claude/

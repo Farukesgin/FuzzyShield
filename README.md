@@ -70,6 +70,10 @@ matlab/
 figures/               Pre-generated figures (architecture, MFs, surfaces, …)
 referance_values.txt   Input vectors used for the 3D rule-surface plots
 requirements.txt       Python dependencies
+report/
+  main.tex / main.pdf            IEEE conference paper (full project report)
+  presentation.tex / .pdf        Beamer slides (16:9)
+  generate_figures.py            Regenerates the report figures
 ```
 
 Runs create an `output/` directory (git-ignored):
